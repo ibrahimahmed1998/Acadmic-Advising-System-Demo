@@ -22,7 +22,7 @@ class CreateCourseTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('ccode')->index();
+            $table->string('ccode'); //->index();
             $table->string('cname',45);
             $table->integer('cch');
             $table->integer('dmidterm');
@@ -32,6 +32,9 @@ class CreateCourseTable extends Migration
             $table->integer('dfinal');
             $table->string('dtotal', 45);
             $table->string('instructor', 45);
+
+            $table->primary(array('ccode'));
+
          });
     }
 
