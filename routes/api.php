@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Student_Area;
 use App\Http\Controllers\Yellow_Area;
 use App\Http\Controllers\Admin;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ChatsController;
 
  
 Route::middleware('auth:api')->get('/user', function (Request $request) 
@@ -67,8 +67,18 @@ Route::group(
         Route::post('search', Admin::class . '@search');
         Route::post('list_all', Admin::class . '@list_all');
         Route::post('signup', Admin::class . '@signup');
-
-
-
     }
+);
+
+// Auth::routes();
+
+    Route::group( 
+        ['middleware' => 'api', 'prefix' => 'chat'],
+    function ($router) {
+
+Route::get('/', ChatsController::class.'@index');
+Route::get('messages', ChatsController::class.'@fetchMessages');
+Route::post('messages', ChatsController::class.'@sendMessage');
+
+}
 );

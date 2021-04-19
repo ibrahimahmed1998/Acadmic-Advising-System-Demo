@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ChatsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +17,3 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 
-Route::get('/', ChatsController::class.'@index');
-Route::get('messages', ChatsController::class.'@fetchMessages');
-Route::post('messages', ChatsController::class.'@sendMessage');
