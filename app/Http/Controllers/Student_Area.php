@@ -76,9 +76,6 @@ class Student_Area extends Controller
         $passed_courses = SCT::where('hpass', 1)->where('Student_id', $request->student_id)->get();
 
         $sum = 0;
-        foreach ($passed_courses as $p) {
-            $sum = $sum + Course::where('ccode', $p->ccode)->value('cch');
-        }
 
         $student = Student::where('student_id', $request->student_id)->first();
 
@@ -145,7 +142,6 @@ class Student_Area extends Controller
                 ]);
 
                 $section_courses = Shc::where('dep_id', $request->department_id)->where('sec_id', $request->section_id)->get();
-                $passed_courses = Sct::where('hpass', 1)->where('Student_id', $request->student_id)->get();
 
                 $x = response()->json([$section_courses], 201);
                 dd($x);
@@ -169,9 +165,8 @@ class Student_Area extends Controller
     public function cancel_course(Validate_SCT $request)
     {
         /* permison */
-        $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
 
-        if ($check) {
+   
             $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->delete();
             return response()->json(['Sucessfully' => " Course Canceled Sucessfully"], 201);
         } else {
